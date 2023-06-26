@@ -4,6 +4,15 @@ const scissor = "3";
 let playerTally = 0;
 let compTally = 0;
 
+// playerSelection is now onclick -- check button class
+const btn = document.querySelectorAll('.btn');
+
+btn.forEach(button => {
+  button.addEventListener('click', () => {
+    console.log(playRound(button.id, getComputerChoice()));
+  });
+});
+
 const getComputerChoice = () => {
   switch ((comNum = Math.floor(Math.random() * 3 + 1))) {
     case 1:
@@ -16,7 +25,6 @@ const getComputerChoice = () => {
 };
 
 function playRound(playerSelection, computerSelection) {
-  playerSelection = playerSelection.toLowerCase();
   switch (playerSelection) {
     case "rock":
       if (computerSelection == "paper") {
@@ -33,7 +41,7 @@ function playRound(playerSelection, computerSelection) {
         compTally++;
         return "You Lose! Scissors Beats Rock!";
       } else if (computerSelection == "rock") {
-        paperTally++;
+        playerTally++;
         return "You Win! Paper Beats Rock!";
       } else {
         return "DRAW";
@@ -43,28 +51,10 @@ function playRound(playerSelection, computerSelection) {
         compTally++;
         return "You Lose! Rock Beats Scissors!";
       } else if (computerSelection == "paper") {
-        paperTally++;
+        playerTally++;
         return "You Win! Scissors Beats Paper!";
       } else {
         return "DRAW";
       }
   }
 }
-
-function game() {
-  playerTally = 0;
-  compTally = 0;
-  for (let i = 0; i < 5; i++) {
-    const computerSelection = getComputerChoice();
-    console.log(
-      playRound(
-        (playerSelection = prompt("Please enter choice:")),
-        computerSelection
-      )
-    );
-    // console.log(`PLA: ${playerSelection}, COM: ${computerSelection}`) debug line
-  }
-  console.log(`PLA: ${playerTally} - COM: ${compTally}`)
-}
-
-game();
