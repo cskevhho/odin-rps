@@ -25,41 +25,69 @@ const getComputerChoice = () => {
 };
 
 function playRound(playerSelection, computerSelection) {
-  const para = document.createElement("p");
+  const outcome = document.createElement("p");
+  const score = document.createElement("p");
+
   switch (playerSelection) {
     case "rock":
       if (computerSelection == "paper") {
         compTally++;
-        para.textContent = "You Lose! Paper Beats Rock!";
+        outcome.textContent = "You Lose! Paper Beats Rock!";
       } else if (computerSelection == "scissors") {
         playerTally++;
-        para.textContent = "You Win! Rock Beats Scissors!";
+        outcome.textContent = "You Win! Rock Beats Scissors!";
       } else {
-        para.textContent = "DRAW";
+        outcome.textContent = "DRAW";
       }
       break;
     case "paper":
       if (computerSelection == "scissors") {
         compTally++;
-        para.textContent = "You Lose! Scissors Beats Rock!";
+        outcome.textContent = "You Lose! Scissors Beats Rock!";
       } else if (computerSelection == "rock") {
         playerTally++;
-        para.textContent = "You Win! Paper Beats Rock!";
+        outcome.textContent = "You Win! Paper Beats Rock!";
       } else {
-        para.textContent = "DRAW";
+        outcome.textContent = "DRAW";
       }
       break;
     default: // Assuming input is sterilized I guess
       if (computerSelection == "rock") {
         compTally++;
-        para.textContent = "You Lose! Rock Beats Scissors!";
+        outcome.textContent = "You Lose! Rock Beats Scissors!";
       } else if (computerSelection == "paper") {
         playerTally++;
-        para.textContent = "You Win! Scissors Beats Paper!";
+        outcome.textContent = "You Win! Scissors Beats Paper!";
       } else {
-        para.textContent = "DRAW";
+        outcome.textContent = "DRAW";
       }
       break;
   }
-  textdiv.appendChild(para);
+  score.textContent = `PLY: ${playerTally} - COM: ${compTally}`;
+  textdiv.appendChild(outcome);
+  textdiv.appendChild(score);
+  scrollToBottom();
+
+  if (playerTally == 5 || compTally == 5) {
+    gameOver();
+  }
+}
+
+function gameOver() {
+  const endMessage = document.createElement("p");
+
+  if (playerTally == 5) {
+    endMessage.textContent = "GAME OVER! YOU WIN";
+  } else if (compTally == 5) {
+    endMessage.textContent = "GAME OVER! YOU LOSE";
+  }
+  textdiv.appendChild(endMessage);
+  playerTally = 0;
+  compTally = 0;
+  scrollToBottom();
+}
+
+
+const scrollToBottom = () => {
+  textdiv.scrollTop = textdiv.scrollHeight;
 }

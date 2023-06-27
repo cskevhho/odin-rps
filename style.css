@@ -32,6 +32,9 @@ button {
 }
 
 .textbox {
+    display:flex;
+    flex-direction: column;
+    flex-grow: 1;
     align-self: center;
     margin-top: 20px;
     background-color: beige;
@@ -39,7 +42,7 @@ button {
     margin-bottom: 40px;
     width: 80%;
     text-align:center;
-    overflow:scroll;
+    overflow:hidden;
 }
 
 .btn-div {
