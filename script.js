@@ -4,12 +4,12 @@ const scissor = "3";
 let playerTally = 0;
 let compTally = 0;
 
-// playerSelection is now onclick -- check button class
-const btn = document.querySelectorAll('.btn');
+const btn = document.querySelectorAll(".btn");
+const textdiv = document.querySelector(".textbox");
 
-btn.forEach(button => {
-  button.addEventListener('click', () => {
-    console.log(playRound(button.id, getComputerChoice()));
+btn.forEach((button) => {
+  button.addEventListener("click", () => {
+    playRound(button.id, getComputerChoice());
   });
 });
 
@@ -25,36 +25,41 @@ const getComputerChoice = () => {
 };
 
 function playRound(playerSelection, computerSelection) {
+  const para = document.createElement("p");
   switch (playerSelection) {
     case "rock":
       if (computerSelection == "paper") {
         compTally++;
-        return "You Lose! Paper Beats Rock!";
+        para.textContent = "You Lose! Paper Beats Rock!";
       } else if (computerSelection == "scissors") {
         playerTally++;
-        return "You Win! Rock Beats Scissors!";
+        para.textContent = "You Win! Rock Beats Scissors!";
       } else {
-        return "DRAW";
+        para.textContent = "DRAW";
       }
+      break;
     case "paper":
       if (computerSelection == "scissors") {
         compTally++;
-        return "You Lose! Scissors Beats Rock!";
+        para.textContent = "You Lose! Scissors Beats Rock!";
       } else if (computerSelection == "rock") {
         playerTally++;
-        return "You Win! Paper Beats Rock!";
+        para.textContent = "You Win! Paper Beats Rock!";
       } else {
-        return "DRAW";
+        para.textContent = "DRAW";
       }
+      break;
     default: // Assuming input is sterilized I guess
       if (computerSelection == "rock") {
         compTally++;
-        return "You Lose! Rock Beats Scissors!";
+        para.textContent = "You Lose! Rock Beats Scissors!";
       } else if (computerSelection == "paper") {
         playerTally++;
-        return "You Win! Scissors Beats Paper!";
+        para.textContent = "You Win! Scissors Beats Paper!";
       } else {
-        return "DRAW";
+        para.textContent = "DRAW";
       }
+      break;
   }
+  textdiv.appendChild(para);
 }
